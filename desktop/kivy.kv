@@ -1,0 +1,227 @@
+
+#Основной экран
+<ReadWriteScreen>:
+    GridLayout:
+        rows: 2
+        Carousel:
+            id: carousel
+            direction: 'right'
+            loop: True
+            BoxLayout:
+                GridLayout:
+                    rows: 2
+                    Label:
+                        size_hint_y: .05
+                        color: 'black'
+                        text: 'Метеограмма на 5 дней'
+                        background_color: (1, 1, 1, 1)
+			            canvas.before:
+			            	Color:
+			            		rgba: self.background_color
+			            	Rectangle:
+			            		size: self.size
+			            		pos: self.pos
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        bar_width: 10
+                        bar_margin: 3
+                        bar_color: [.5, .5, .5, .9]
+                        bar_inactive_color: [.5, .5, .5, .5]
+                        AsyncImage:
+                            id: im1
+        	        	    source: root.source1
+        	        	    allow_stretch: True
+                            keep_ratio: False
+                            size: root.width, root.width*0.66
+                            size_hint: 1, None
+            BoxLayout:
+                GridLayout:
+                    rows: 2
+                    Label:
+                        size_hint_y: .05
+                        color: 'black'
+                        text: '2-х недельный прогноз'
+                        background_color: (1, 1, 1, 1)
+			            canvas.before:
+			            	Color:
+			            		rgba: self.background_color
+			            	Rectangle:
+			            		size: self.size
+			            		pos: self.pos
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        bar_width: 10
+                        bar_margin: 3
+                        bar_color: [.5, .5, .5, .9]
+                        bar_inactive_color: [.5, .5, .5, .5]
+                        AsyncImage:
+                            id: im2
+        	        	    source: root.source2
+        	        	    allow_stretch: True
+                            keep_ratio: False
+                            size: root.width, root.width*0.81
+                            size_hint: 1, None
+            BoxLayout:
+                GridLayout:
+                    rows: 2
+                    Label:
+                        size_hint_y: .05
+                        color: 'black'
+                        text: 'Мультимодель'
+                        background_color: (1, 1, 1, 1)
+			            canvas.before:
+			            	Color:
+			            		rgba: self.background_color
+			            	Rectangle:
+			            		size: self.size
+			            		pos: self.pos
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        bar_width: 10
+                        bar_margin: 3
+                        bar_color: [.5, .5, .5, .9]
+                        bar_inactive_color: [.5, .5, .5, .5]
+                        AsyncImage:
+                            id: im3
+        	        	    source: root.source3
+        	        	    allow_stretch: True
+                            keep_ratio: False
+                            size: root.width, root.width*1.94
+                            size_hint: 1, None
+        BoxLayout:
+            size_hint_y: .1
+            Button:
+                text: 'Инфо'
+                on_release: root.manager.current = 'info'
+            Button:
+                text: 'Пред'
+                on_release:
+                    carousel.load_previous()
+            Button:
+                text: 'След'
+                on_release:
+                    carousel.load_next()
+#экран загрузки
+<TitleScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Нажмите "Загрузить" и дождитесь загрузки данных'
+            size_hint_y: .10
+            color: 'white'
+        Image:
+            source: root.source_down
+        Button:
+            text: 'Загрузить'
+            size_hint_y: 0.12
+            on_release: root.manager.current = 'meteo'
+#экран информации
+<InfoScreen>:
+    GridLayout:
+        rows: 2
+        Carousel:
+            id: carousel_info
+            direction: 'right'
+            loop: True
+
+        	BoxLayout:
+                id: info1
+                GridLayout:
+                    rows: 2
+                    Label:
+                        size_hint_y: .1
+                        color: 'black'
+                        text: 'Метеограмма на 5 дней'
+                        background_color: (1, 1, 1, 1)
+			            canvas.before:
+			            	Color:
+			            		rgba: self.background_color
+			            	Rectangle:
+			            		size: self.size
+			            		pos: self.pos
+			        Label:
+			            text: """Представлены 3 графика:\n* График температуры с условными обозначениями погодных условий. Время от рассвета до заката обозначается желтым цветом.\n* График облачности и осадков. Облачность от светло-серой(слабая) до темно-серой(сплошная облачность) с распределением по высоте. Темно-синие планки показывают почасовые осадки, а светло-синие указывают на ливни(??? Описание взято с сайта). Астериксом обозначается снегопад.\n* График ветра. Скорость ветра - синяя линия, порывы ветра обозначены темной линией. Указатели стрелок предствлены в том же направлении, в котором ожидается ветер."""
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+
+        	BoxLayout:
+                id: info2
+                GridLayout:
+                    rows: 2
+                    Label:
+                        size_hint_y: .1
+                        color: 'black'
+                        text: '2-х недельный прогноз.'
+                        background_color: (1, 1, 1, 1)
+			            canvas.before:
+			            	Color:
+			            		rgba: self.background_color
+			            	Rectangle:
+			            		size: self.size
+			            		pos: self.pos
+			        Label:
+			            text: '''* Данный график показывает погодный тренд на 14 дней с условными обозначениями метеоэлементов, минимальной и максимальной температурой, количеством осадков и вероятностью прогноза.\n* График температуры. Чем шире цветная линия, тем более неопределенным будет прогноз. Центральная линия представляет собой наиболее вероятную тенденцию.\n* Вариации осадков представлены в виде буквы "Т". Эти неопределенности обычно увеличиваются с количеством дней прогноза.(???)\n\nПрогноз создается с помощью "ансамбля" моделей. Для более точной оценки предсказуемости прогноза рассчитывается несколько прогонов модели с изменяющимся начальным параметром.'''
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+
+            BoxLayout:
+                id: info3
+                GridLayout:
+                    rows: 2
+                    Label:
+                        size_hint_y: .1
+                        color: 'black'
+                        text: 'Мультимодель'
+                        background_color: (1, 1, 1, 1)
+		                canvas.before:
+		                	Color:
+		                		rgba: self.background_color
+		                	Rectangle:
+		                		size: self.size
+		                		pos: self.pos
+		            Label:
+		                text: '''Данные графики показывают прогноз, определенный разными погодными моделями. В каждой модели используется какой-то определенный цвет, который присутствует во всех диаграммах. Схема условных обозначений включает в себя список названий моделей и соответствующие им цвета.\n* На первой диаграмме показываются прогнозируемые температуры для каждой модели. Время от рассвета до заката отмечено желтым цветом. Пунктирная линия представляет среднее значение всех моделей.\n* Вторая диаграмма показывает количество осадков: Синие планки указывают на осадки в мм, накопляемые в течение часа. Планки становятся темнее, когда все больше моделей прогнозируют осадки.\n* Погодные иконки используются для обозначения прогнозируемых погодных условий в третьей диаграмме.\n\nОтображаемые параметры берутся прямо с данных моделей и не соотносятся с точной высотой и позицией выбранного места.'''
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+            BoxLayout:
+                id: about
+			    Label:
+			        text: 'MeteoValday (ver 1.0.3 desktop)\n\nМетеограммы для Валдая с сайта www.meteoblue.com \n\n© Evgenich   2023\n\n\nt.me/Evgenich_Val\nvk.com/for_evgenich'
+			        halign: 'center'
+        BoxLayout:
+            size_hint_y: .10
+            Button:
+                text: 'Назад'
+                on_release: root.manager.current = 'meteo'
+            Button:
+                text: 'на 5 дней'
+                on_release:
+                    carousel_info.load_slide(carousel_info.slides[0])
+            Button:
+                text: '2 недели'
+                on_release:
+                    carousel_info.load_slide(carousel_info.slides[1])
+            Button:
+                text: 'Мультимодель'
+                on_release:
+                    carousel_info.load_slide(carousel_info.slides[2])
+            Button:
+                text: 'О программе'
+                on_release:
+                    carousel_info.load_slide(carousel_info.slides[3])
+
+
+
+ScreenManager:
+    TitleScreen:
+        name: 'title'
+    ReadWriteScreen:
+        name: 'meteo'
+    InfoScreen:
+        name: 'info'
