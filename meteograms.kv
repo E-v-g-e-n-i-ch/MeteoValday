@@ -1,0 +1,106 @@
+<MeteogramScreen>:
+    name: 'MeteogramScreen'
+    GridLayout:
+        rows: 2
+        Carousel:
+            id: carousel
+            direction: 'right'
+            loop: True
+            BoxLayout:
+                GridLayout:
+                    rows: 2
+                    Label:
+                        size_hint_y: .05
+                        color: 'black'
+                        text: 'Метеограмма на 5 дней'
+                        background_color: (1, 1, 1, 1)
+			            canvas.before:
+			            	Color:
+			            		rgba: self.background_color
+			            	Rectangle:
+			            		size: self.size
+			            		pos: self.pos
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        bar_width: 10
+                        bar_margin: 3
+                        bar_color: [.5, .5, .5, .9]
+                        bar_inactive_color: [.5, .5, .5, .5]
+                        AsyncImage:
+                            id: im1
+        	        	    source: app.source1
+        	        	    allow_stretch: True
+                            keep_ratio: False
+                            size: root.width, root.width*0.66
+                            size_hint: 1, None
+            BoxLayout:
+                GridLayout:
+                    rows: 2
+                    Label:
+                        size_hint_y: .05
+                        color: 'black'
+                        text: '2-х недельный прогноз'
+                        background_color: (1, 1, 1, 1)
+			            canvas.before:
+			            	Color:
+			            		rgba: self.background_color
+			            	Rectangle:
+			            		size: self.size
+			            		pos: self.pos
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        bar_width: 10
+                        bar_margin: 3
+                        bar_color: [.5, .5, .5, .9]
+                        bar_inactive_color: [.5, .5, .5, .5]
+                        AsyncImage:
+                            id: im2
+        	        	    source: app.source2
+        	        	    allow_stretch: True
+                            keep_ratio: False
+                            size: root.width, root.width*0.81
+                            size_hint: 1, None
+            BoxLayout:
+                GridLayout:
+                    rows: 2
+                    Label:
+                        size_hint_y: .05
+                        color: 'black'
+                        text: 'Мультимодель'
+                        background_color: (1, 1, 1, 1)
+			            canvas.before:
+			            	Color:
+			            		rgba: self.background_color
+			            	Rectangle:
+			            		size: self.size
+			            		pos: self.pos
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        bar_width: 10
+                        bar_margin: 3
+                        bar_color: [.5, .5, .5, .9]
+                        bar_inactive_color: [.5, .5, .5, .5]
+                        AsyncImage:
+                            id: im3
+        	        	    source: app.source3
+        	        	    allow_stretch: True
+                            keep_ratio: False
+                            size: root.width, root.width*1.94
+                            size_hint: 1, None
+        BoxLayout:
+            size_hint_y: .20
+            Button:
+                text: 'Назад'
+                on_release: app.out()
+            Button:
+                text: 'Пред'
+                on_release:
+                    carousel.load_previous()
+            Button:
+                text: 'След'
+                on_release:
+                    carousel.load_next()
+

@@ -1,0 +1,47 @@
+<TitleScreen>:
+    id: 'MainScreen'
+    name: 'MainScreen'
+    #canvas:
+    #    Rectangle:
+    #        source: 'Images/fon.jpg'
+    #        pos: self.pos
+    #        size: self.size
+    BoxLayout:
+        name: 'MainBoxlayout'
+        orientation: 'vertical'
+        background_color: 1,0,0,1
+        BoxLayout:
+            size_hint_y: .3
+            Label:
+                text: '- MeteoValday -'
+                font_size: 35
+                bold: True
+                size_hint_y: .5
+                color: 'white'
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 10,10,10,10
+            spacing: 10
+            Button:
+                id: 'main.butt.info'
+                text: 'Информация'
+                font_size: 35
+                size_hint_x: 0.30
+                background_color: .2, .7, .9, 1
+                on_release: app.info()
+            Button:
+                id: 'main.butt.rad'
+                text: 'Радар'
+                font_size: 35
+                size_hint_x: 0.30
+                background_color: .2, .7, .9, 1
+                on_release: app.radar()
+            Button:
+                id: 'main.butt.meteogr'
+                text: 'Метеограммы'
+                font_size: 35
+                size_hint_x: 0.30
+                background_color: .2, .7, .9, 1
+                on_release: app.meteogram()
+        BoxLayout:
+            size_hint_y: .25
