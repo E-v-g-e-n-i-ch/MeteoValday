@@ -1,6 +1,6 @@
 
 # MeteoValday
-Метеограммы с www.meteoblue.com/ для города Валдай
+Метеограммы  для города Валдай
 
 
 ![1](https://github.com/E-v-g-e-n-i-ch/MeteoValday/assets/88594555/388dfa2a-0d22-4081-a0b5-f0fef2e607fd)
